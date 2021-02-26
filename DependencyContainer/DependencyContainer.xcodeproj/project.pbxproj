@@ -8,12 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		1BEF668625E941C9006AA625 /* DependencyContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BEF668425E941C9006AA625 /* DependencyContainer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1BEF669325E94518006AA625 /* Resolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEF669225E94518006AA625 /* Resolver.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1BEF668125E941C9006AA625 /* DependencyContainer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DependencyContainer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BEF668425E941C9006AA625 /* DependencyContainer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DependencyContainer.h; sourceTree = "<group>"; };
 		1BEF668525E941C9006AA625 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1BEF669225E94518006AA625 /* Resolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resolver.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,10 +48,19 @@
 		1BEF668325E941C9006AA625 /* DependencyContainer */ = {
 			isa = PBXGroup;
 			children = (
+				1BEF669125E9450F006AA625 /* Resolver */,
 				1BEF668425E941C9006AA625 /* DependencyContainer.h */,
 				1BEF668525E941C9006AA625 /* Info.plist */,
 			);
 			path = DependencyContainer;
+			sourceTree = "<group>";
+		};
+		1BEF669125E9450F006AA625 /* Resolver */ = {
+			isa = PBXGroup;
+			children = (
+				1BEF669225E94518006AA625 /* Resolver.swift */,
+			);
+			path = Resolver;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -94,6 +105,7 @@
 				TargetAttributes = {
 					1BEF668025E941C9006AA625 = {
 						CreatedOnToolsVersion = 12.2;
+						LastSwiftMigration = 1220;
 					};
 				};
 			};
@@ -130,6 +142,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BEF669325E94518006AA625 /* Resolver.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +274,7 @@
 		1BEF668A25E941C9006AA625 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -276,6 +290,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = akash.DependencyContainer;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -284,6 +299,7 @@
 		1BEF668B25E941C9006AA625 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
