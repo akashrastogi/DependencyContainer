@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol Resolver {
+public protocol Resolver {
   /// Resolves to an instance of type `Service` if instance/factory has already been registered.
   func resolve<Service>(_ serviceType: Service.Type, name: String?) -> Service
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum ObjectScope {
+public enum ObjectScope {
   case transient /// Create a new instance from factory everytime
   case weak /// Shared within the container as long as there are other strong references to it
   case container /// Same instance shared within the container

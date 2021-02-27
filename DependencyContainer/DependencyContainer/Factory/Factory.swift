@@ -8,4 +8,4 @@
 import Foundation
 
 /// Define Factory to generate instances of the generic type `Service`
-typealias Factory<Service> = (Resolver) -> Service
+public typealias Factory<Service> = (Resolver) -> Service

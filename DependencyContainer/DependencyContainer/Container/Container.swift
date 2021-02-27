@@ -8,10 +8,10 @@
 import Foundation
 
 /// Stores the configuration on how to create instances of the registered types
-final class Container {
+public final class Container {
   private lazy var dependencies: [String: DependencyReference] = [:]
 
-  init() {}
+  public init() {}
 
   /// Initializes a new container with existing dependencies
   private init(dependencies: [String: DependencyReference]) {
@@ -24,7 +24,7 @@ final class Container {
   }
 
   /// Register the `instance/factory` as a object of Type `Service`.
-  func register<Service>(
+  public func register<Service>(
     _ serviceType: Service.Type,
     scope: ObjectScope = .transient,
     name: String? = nil,
@@ -47,7 +47,7 @@ final class Container {
   }
 
   /// Remove instance/factory from the container by type or name
-  func remove<Service>(
+  public func remove<Service>(
     _ serviceType: Service.Type,
     name: String? = nil
   ) {
@@ -56,14 +56,14 @@ final class Container {
   }
 
   /// Remove all the instances and factories from the container
-  func removeAll() {
+  public func removeAll() {
     dependencies.removeAll()
   }
 }
 
 extension Container: Resolver {
   /// Resolves to an instance of type `Service` if instance/factory has already been registered.
-  func resolve<Service>(_ serviceType: Service.Type, name: String? = nil) -> Service {
+  public func resolve<Service>(_ serviceType: Service.Type, name: String? = nil) -> Service {
     let key = name ?? typeName(some: Service.self)
     guard let dependencyReference = dependencies[key] else {
       fatalError("Unable to resolve \(serviceType) ")
