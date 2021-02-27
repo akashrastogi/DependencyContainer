@@ -12,6 +12,7 @@
 		1BEF669725E94A98006AA625 /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEF669625E94A98006AA625 /* Factory.swift */; };
 		1BEF669B25E94C0A006AA625 /* ObjectScope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEF669A25E94C0A006AA625 /* ObjectScope.swift */; };
 		1BEF669F25E94C39006AA625 /* DependencyReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEF669E25E94C39006AA625 /* DependencyReference.swift */; };
+		1BEF66A325E94DCA006AA625 /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEF66A225E94DCA006AA625 /* Container.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		1BEF669625E94A98006AA625 /* Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
 		1BEF669A25E94C0A006AA625 /* ObjectScope.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectScope.swift; sourceTree = "<group>"; };
 		1BEF669E25E94C39006AA625 /* DependencyReference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyReference.swift; sourceTree = "<group>"; };
+		1BEF66A225E94DCA006AA625 /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 				1BEF669125E9450F006AA625 /* Resolver */,
 				1BEF669525E94A91006AA625 /* Factory */,
 				1BEF669925E94BE4006AA625 /* Models */,
+				1BEF66A125E94DA2006AA625 /* Container */,
 				1BEF668425E941C9006AA625 /* DependencyContainer.h */,
 				1BEF668525E941C9006AA625 /* Info.plist */,
 			);
@@ -86,6 +89,14 @@
 				1BEF669E25E94C39006AA625 /* DependencyReference.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		1BEF66A125E94DA2006AA625 /* Container */ = {
+			isa = PBXGroup;
+			children = (
+				1BEF66A225E94DCA006AA625 /* Container.swift */,
+			);
+			path = Container;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -169,6 +180,7 @@
 			files = (
 				1BEF669725E94A98006AA625 /* Factory.swift in Sources */,
 				1BEF669325E94518006AA625 /* Resolver.swift in Sources */,
+				1BEF66A325E94DCA006AA625 /* Container.swift in Sources */,
 				1BEF669F25E94C39006AA625 /* DependencyReference.swift in Sources */,
 				1BEF669B25E94C0A006AA625 /* ObjectScope.swift in Sources */,
 			);
