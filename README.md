@@ -21,7 +21,7 @@ Object Scope is a configuration option to determine how an instance provided by 
 The scope can be defined at the time of dependancy registration-
 ```swift
 container.register(EventTracking.self, scope: .container) { _ -> EventTracking in
-	EventTracker()
+  EventTracker()
 }
 ```
 
@@ -46,7 +46,7 @@ In `ObjectScope.container`, an instance provided by a container is shared within
 
 ```swift
 container.register(EventTracking.self) { _ -> EventTracking in
-	EventTracker()
+  EventTracker()
 }
 ```
 
