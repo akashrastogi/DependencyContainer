@@ -8,11 +8,9 @@
 import Foundation
 
 protocol HomeScreenInteracting: AnyObject {
-  
-  var presenter: HomeScreenPresenting?  { get set }
+  var presenter: HomeScreenPresenting? { get set }
 }
 
 final class HomeScreenInteractor: HomeScreenInteracting {
-  
   weak var presenter: HomeScreenPresenting?
 }

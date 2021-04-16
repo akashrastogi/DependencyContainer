@@ -16,7 +16,7 @@ final class HomeScreenPresenter: HomeScreenPresenting {
   private let interactor: HomeScreenInteracting
   private let router: HomeScreenRouting
   private let tracker: EventTracking
-  
+
   init(
     interactor: HomeScreenInteracting,
     router: HomeScreenRouting,
@@ -26,7 +26,7 @@ final class HomeScreenPresenter: HomeScreenPresenting {
     self.router = router
     self.tracker = tracker
   }
-  
+
   func onViewDidLoad() {
     tracker.trackEvent(name: "HomeScreenLoaded")
   }

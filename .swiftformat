@@ -1,0 +1,31 @@
+# file options
+
+--exclude Tests/XCTestManifests.swift,Snapshots,ActiveBuild,Carthage,fastlane,Pods,scripts,vendor
+# format options
+
+--commas inline
+--binarygrouping none
+--decimalgrouping none
+--octalgrouping none
+--exponentcase lowercase
+--header ignore
+--ifdef outdent
+--indent 2
+--self init-only
+--stripunusedargs unnamed-only
+--swiftversion 5
+--trimwhitespace always
+--wraparguments before-first
+--wrapparameters before-first
+--wrapcollections before-first
+--xcodeindentation enabled
+--nospaceoperators ...,..>,..<
+
+# rules
+
+--enable isEmpty
+--disable emptyBraces
+--disable blankLinesAroundMark
+--disable wrapMultilineStatementBraces
+--disable enumNamespaces
+--disable extensionAccessControl

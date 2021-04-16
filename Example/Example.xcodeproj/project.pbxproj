@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B236D902629A5C200C8CFCA /* DependencyContainer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B236D8F2629A5C200C8CFCA /* DependencyContainer.framework */; };
 		1BEF66B725E9FF08006AA625 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEF66B625E9FF08006AA625 /* AppDelegate.swift */; };
 		1BEF66C025E9FF09006AA625 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BEF66BF25E9FF09006AA625 /* Assets.xcassets */; };
 		1BEF66C325E9FF09006AA625 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1BEF66C125E9FF09006AA625 /* LaunchScreen.storyboard */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1B236D8F2629A5C200C8CFCA /* DependencyContainer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = DependencyContainer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BEF66B325E9FF08006AA625 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BEF66B625E9FF08006AA625 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1BEF66BF25E9FF09006AA625 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -43,17 +45,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B236D902629A5C200C8CFCA /* DependencyContainer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1B236D8E2629A5C200C8CFCA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1B236D8F2629A5C200C8CFCA /* DependencyContainer.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		1BEF66AA25E9FF08006AA625 = {
 			isa = PBXGroup;
 			children = (
 				1BEF66B525E9FF08006AA625 /* Example */,
 				1BEF66B425E9FF08006AA625 /* Products */,
+				1B236D8E2629A5C200C8CFCA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};

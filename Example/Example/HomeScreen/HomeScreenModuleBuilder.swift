@@ -5,20 +5,19 @@
 //  Created by Akash Rastogi on 27/2/21.
 //
 
-import UIKit
 import DependencyContainer
+import UIKit
 
 protocol HomeScreenModuleBuilding {
   func buildModule() -> UIViewController
 }
 
 struct HomeScreenModuleBuilder: HomeScreenModuleBuilding {
-
   private let container: Container
   init(_ container: Container) {
     self.container = container
   }
-  
+
   func buildModule() -> UIViewController {
     let interactor = HomeScreenInteractor()
     let router = HomeScreenRouter()
@@ -29,7 +28,7 @@ struct HomeScreenModuleBuilder: HomeScreenModuleBuilding {
     )
     let view = HomeScreenViewController(
       presenter: presenter,
-      loaderProvider:container.resolve(LoaderProviding.self)
+      loaderProvider: container.resolve(LoaderProviding.self)
     )
     presenter.view = view
 

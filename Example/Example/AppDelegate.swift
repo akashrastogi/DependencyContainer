@@ -5,13 +5,13 @@
 //  Created by Akash Rastogi on 27/2/21.
 //
 
-import UIKit
 import DependencyContainer
+import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
   var window: UIWindow?
-  
+
   func application(
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
@@ -20,11 +20,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     container.register(LoaderProviding.self) { _ -> LoaderProviding in
       LoaderProvider()
     }
-    
+
     container.register(EventTracking.self) { _ -> EventTracking in
       EventTracker()
     }
-    
+
     let homeViewController = HomeScreenModuleBuilder(container).buildModule()
     let navigationController = UINavigationController(rootViewController: homeViewController)
     navigationController.navigationBar.tintColor = UIColor.darkText

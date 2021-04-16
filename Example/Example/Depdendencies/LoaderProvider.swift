@@ -11,7 +11,7 @@ struct LoaderProvider: LoaderProviding {
   func showLoadingView(on view: UIView) {
     print("adding loader")
   }
-  
+
   func hideLoadingView(on view: UIView) {
     print("removing loader")
   }

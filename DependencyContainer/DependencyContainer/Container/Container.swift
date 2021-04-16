@@ -10,24 +10,24 @@ import Foundation
 /// Stores the configuration on how to create instances of the registered types
 public final class Container {
   private lazy var dependencies: [String: DependencyReference] = [:]
-  
+
   public init() {}
-  
+
   /// Initializes a new container with existing dependencies
   private init(dependencies: [String: DependencyReference]) {
     self.dependencies = dependencies
   }
-  
+
   /// Concurrent synchronization queue
   private let queue = DispatchQueue(label: "Container.queue", attributes: .concurrent)
-  
+
   /// Get name of service if not received
   private func typeName(some: Any) -> String {
     queue.sync {
-      return "\(type(of: some))"
+      "\(type(of: some))"
     }
   }
-  
+
   /// Register the `instance/factory` as a object of Type `Service`.
   public func register<Service>(
     _ serviceType: Service.Type,
@@ -37,11 +37,11 @@ public final class Container {
   ) {
     let key = name ?? typeName(some: Service.self)
     var dependencyReference = DependencyReference(scope: scope)
-    
+
     /// Write with .barrier
     queue.async(flags: .barrier) { [weak self] in
       guard let self = self else { return }
-      
+
       switch scope {
       case .transient:
         dependencyReference.transientDependency = factory
@@ -55,7 +55,7 @@ public final class Container {
       self.dependencies[key] = dependencyReference
     }
   }
-  
+
   /// Remove instance/factory from the container by type or name
   public func remove<Service>(
     _ serviceType: Service.Type,
@@ -67,7 +67,7 @@ public final class Container {
       self.dependencies.removeValue(forKey: key)
     }
   }
-  
+
   /// Remove all the instances and factories from the container
   public func removeAll() {
     queue.async(flags: .barrier) { [weak self] in
@@ -82,11 +82,11 @@ extension Container: Resolver {
   public func resolve<Service>(_ serviceType: Service.Type, name: String? = nil) -> Service {
     let key = name ?? typeName(some: Service.self)
     var currentDependencies: [String: DependencyReference] = [:]
-    
+
     queue.sync { // Read
       currentDependencies = dependencies
     }
-    
+
     guard let dependencyReference = currentDependencies[key] else {
       fatalError("Unable to resolve \(serviceType) ")
     }

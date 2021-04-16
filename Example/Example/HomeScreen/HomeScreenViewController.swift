@@ -11,10 +11,9 @@ protocol HomeScreenView: AnyObject {
 }
 
 final class HomeScreenViewController: UIViewController, HomeScreenView {
-  
   private let presenter: HomeScreenPresenting
   private let loaderProvider: LoaderProviding
-  
+
   init(
     presenter: HomeScreenPresenting,
     loaderProvider: LoaderProviding
@@ -26,11 +25,12 @@ final class HomeScreenViewController: UIViewController, HomeScreenView {
       bundle: Bundle(for: type(of: self))
     )
   }
-  
+
+  @available(*, unavailable)
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     presenter.onViewDidLoad()

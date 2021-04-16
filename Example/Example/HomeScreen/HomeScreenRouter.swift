@@ -8,10 +8,8 @@
 import UIKit
 
 protocol HomeScreenRouting: AnyObject {
-  
 }
 
 final class HomeScreenRouter: HomeScreenRouting {
-  
   weak var viewController: UIViewController?
 }
