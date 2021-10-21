@@ -24,11 +24,11 @@ struct HomeScreenModuleBuilder: HomeScreenModuleBuilding {
     let presenter = HomeScreenPresenter(
       interactor: interactor,
       router: router,
-      tracker: container.resolve(EventTracking.self)
+      tracker: container.resolve(EventTracking.self)!
     )
     let view = HomeScreenViewController(
       presenter: presenter,
-      loaderProvider: container.resolve(LoaderProviding.self)
+      loaderProvider: container.resolve(LoaderProviding.self)!
     )
     presenter.view = view
 

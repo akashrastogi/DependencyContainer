@@ -9,23 +9,20 @@ import Foundation
 
 /// Stores the configuration on how to create instances of the registered types
 public final class Container {
-  private lazy var dependencies: [String: DependencyReference] = [:]
+  private var dependencies: ThreadSafeMap<String, DependencyReference>
 
-  public init() {}
+  public init() {
+    self.dependencies = ThreadSafeMap<String, DependencyReference>()
+  }
 
   /// Initializes a new container with existing dependencies
-  private init(dependencies: [String: DependencyReference]) {
+  private init(dependencies: ThreadSafeMap<String, DependencyReference>) {
     self.dependencies = dependencies
   }
 
-  /// Concurrent synchronization queue
-  private let queue = DispatchQueue(label: "Container.queue", attributes: .concurrent)
-
   /// Get name of service if not received
   private func typeName(some: Any) -> String {
-    queue.sync {
-      "\(type(of: some))"
-    }
+    "\(type(of: some))"
   }
 
   /// Register the `instance/factory` as a object of Type `Service`.
@@ -36,24 +33,19 @@ public final class Container {
     factory: @escaping Factory<Service>
   ) {
     let key = name ?? typeName(some: Service.self)
+
     var dependencyReference = DependencyReference(scope: scope)
-
-    /// Write with .barrier
-    queue.async(flags: .barrier) { [weak self] in
-      guard let self = self else { return }
-
-      switch scope {
-      case .transient:
-        dependencyReference.transientDependency = factory
-      case .container:
-        let resolver = Container(dependencies: self.dependencies)
-        dependencyReference.containerDependency = factory(resolver)
-      case .weak:
-        let resolver = Container(dependencies: self.dependencies)
-        dependencyReference.weakDependency = factory(resolver) as AnyObject
-      }
-      self.dependencies[key] = dependencyReference
+    switch scope {
+    case .transient:
+      dependencyReference.transientDependency = factory
+    case .container:
+      let resolver = Container(dependencies: dependencies)
+      dependencyReference.containerDependency = factory(resolver)
+    case .weak:
+      let resolver = Container(dependencies: dependencies)
+      dependencyReference.weakDependency = factory(resolver) as AnyObject
     }
+    dependencies[key] = dependencyReference
   }
 
   /// Remove instance/factory from the container by type or name
@@ -62,48 +54,72 @@ public final class Container {
     name: String? = nil
   ) {
     let key = name ?? typeName(some: Service.self)
-    queue.async(flags: .barrier) { [weak self] in
-      guard let self = self else { return }
-      self.dependencies.removeValue(forKey: key)
-    }
+    dependencies.removeValue(forKey: key)
   }
 
   /// Remove all the instances and factories from the container
   public func removeAll() {
-    queue.async(flags: .barrier) { [weak self] in
-      guard let self = self else { return }
-      self.dependencies.removeAll()
-    }
+    dependencies.removeAll()
   }
 }
 
 extension Container: Resolver {
   /// Resolves to an instance of type `Service` if instance/factory has already been registered.
-  public func resolve<Service>(_ serviceType: Service.Type, name: String? = nil) -> Service {
+  public func resolve<Service>(_ serviceType: Service.Type, name: String? = nil) -> Service? {
     let key = name ?? typeName(some: Service.self)
-    var currentDependencies: [String: DependencyReference] = [:]
-
-    queue.sync { // Read
-      currentDependencies = dependencies
-    }
-
-    guard let dependencyReference = currentDependencies[key] else {
-      fatalError("Unable to resolve \(serviceType) ")
+    guard let dependencyReference = dependencies[key] else {
+      return nil
     }
     var service: Service?
     switch dependencyReference.scope {
     case .transient:
       let factory = dependencyReference.transientDependency as? Factory<Service>
-      let resolver = Container(dependencies: currentDependencies)
+      let resolver = Container(dependencies: dependencies)
       service = factory?(resolver)
     case .container:
       service = dependencyReference.containerDependency as? Service
     case .weak:
       service = dependencyReference.weakDependency as? Service
     }
-    guard let instance = service else {
-      fatalError("Unable to resolve \(serviceType) ")
+    return service
+  }
+}
+
+private extension Container {
+  class ThreadSafeMap<Key: Hashable, Value> {
+    private var dictionary: [Key: Value]
+    init() {
+      self.dictionary = [Key: Value]()
     }
-    return instance
+
+    private let queue = DispatchQueue(
+      label: "Container.queue",
+      attributes: .concurrent
+    )
+
+    subscript(key: Key) -> Value? {
+      get {
+        queue.sync { [weak self] in
+          self?.dictionary[key]
+        }
+      }
+      set(newValue) {
+        queue.async(flags: .barrier) { [weak self] in
+          self?.dictionary[key] = newValue
+        }
+      }
+    }
+
+    func removeAll() {
+      queue.async(flags: .barrier) { [weak self] in
+        self?.dictionary.removeAll()
+      }
+    }
+
+    func removeValue(forKey key: Key) {
+      queue.async(flags: .barrier) { [weak self] in
+        self?.dictionary.removeValue(forKey: key)
+      }
+    }
   }
 }
